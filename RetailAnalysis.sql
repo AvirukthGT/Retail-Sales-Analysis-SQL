@@ -117,9 +117,44 @@ order by 1
 
 -- Q.7 Write a SQL query to calculate the average sale for each month. Find out best selling month in each year
 
-select year,month,max from (
-select to_char(sale_date,'YYYY') as year,to_char(sale_date,'MM') as month,avg(total_sale) from retail
+-- select year,month,max from (
+-- select to_char(sale_date,'YYYY') as year,to_char(sale_date,'MM') as month,avg(total_sale) from retail
+-- group by 1,2
+-- order by 1,2
+-- ) 
+select year,month,avg_sale from 
+(
+select 
+	extract(year from sale_date) as year,
+	extract(month from sale_date) as month,
+	avg(total_sale) as avg_sale,
+	RANK() OVER(PARTITION BY extract(year from sale_date) ORDER BY AVG(total_sale) desc)
+from retail
 group by 1,2
-order by 1,2
-) 
+order by 1,3 desc
+) as t1 
+where rank=1
 
+-- Q.8 Write a SQL query to find the top 5 customers based on the highest total sales 
+select customer_id,sum(total_sale) from retail
+group by 1
+order by 2 desc limit 5
+
+-- Q.9 Write a SQL query to find the number of unique customers who purchased items from each category.
+
+select category,count(distinct customer_id) as distinct_customers from retail 
+group by 1
+
+-- Q.10 Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)
+select shift,count(shift)
+from (
+select *,
+	case 
+		when extract(hour from sale_time)<12 then 'Morning'
+		when extract(hour from sale_time) between 12 and 17 then 'Afternoon'
+		else 'Evening'
+	end as shift
+from retail
+) as t2 
+group by 1
+order by 2 desc
