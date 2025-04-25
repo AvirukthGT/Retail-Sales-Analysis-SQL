@@ -94,7 +94,7 @@ FROM retail_sales
 WHERE sale_date = '2022-11-05';
 ```
 
-2. ** All transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
+2. **All transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
 ```sql
 SELECT 
   *
@@ -164,7 +164,7 @@ GROUP BY 1, 2
 WHERE rank = 1
 ```
 
-8. ** Top 5 customers based on the highest total sales **:
+8. **Top 5 customers based on the highest total sales**:
 ```sql
 SELECT 
     customer_id,
@@ -194,6 +194,13 @@ GROUP BY category
    - Classified transactions into shifts (Morning, Afternoon, Evening) based on sale time.
 6. **High-Value Transactions:** Filtered transactions with significant sales amounts.
 7. **Gender-Based Analysis:** Counted transactions by gender across categories.
+
+   #### Findings
+
+- **Customer Demographics**: The dataset includes customers from various age groups, with sales distributed across different categories such as Clothing and Beauty.
+- **High-Value Transactions**: Several transactions had a total sale amount greater than 1000, indicating premium purchases.
+- **Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
+- **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
 
 ---
 
