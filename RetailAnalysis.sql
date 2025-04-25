@@ -65,4 +65,13 @@ where
 
 select count(*) from retail
 
+--Distinct no of customers
+
+select count(distinct customer_id) as total_sale from retail
+
+
+select distinct category as total_sale from retail
+
+
+
 
